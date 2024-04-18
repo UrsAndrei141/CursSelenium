@@ -20,7 +20,7 @@ public class BaseTest {
 	@AfterClass
 	public void tearDown() {
 		
-		driver.quit();//inchide toate taburile
+		//driver.quit();//inchide toate taburile
 		//driver.close();//inchide tabul curent
 	}
 
