@@ -1,5 +1,7 @@
 package curs15;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -67,7 +69,7 @@ public class CssSelectorExample extends BaseTest {
 	public void cssExample3() {
 		
 		//  * --> contains
-		//ex:
+		//  ex:
 		//  a[href='the-long-road-to-the-deep-silence']
 		//  a[href*='road']
 		WebElement book1 = driver.findElement(By.cssSelector("a[href*='road-to']"));
@@ -81,8 +83,28 @@ public class CssSelectorExample extends BaseTest {
 		
 		WebElement book4 = driver.findElement(By.cssSelector("a[href$='story']"));
 		System.out.println(book4.getText());
+			
+	}
+	
+	@Test
+	public void cssExample4() throws InterruptedException {
 		
+		// direct child in css : >
+		List<WebElement> menuEntries = driver.findElements(By.cssSelector("ul[role='tablist']>li"));
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].setAttribute('style', 'border:4px solid green;')", menuEntries.get(3));
 		
+		WebElement selectMenuEntry = driver.findElement(By.cssSelector("ul[role='tablist']>li[aria-selected='true']"));
+		jse.executeScript("arguments[0].setAttribute('style', 'border:4px solid blue;')", menuEntries.get(0));
+		
+		List<WebElement> notSelectedMenuEntries = driver.findElements(By.cssSelector("ul[role='tablist']>li:not([aria-selected='true'])"));
+		
+		for(WebElement element : notSelectedMenuEntries) {
+			
+			Thread.sleep(3000);
+			jse.executeScript("arguments[0].setAttribute('style', 'border:4px solid orange;')", element);
+			
+		}
 		
 	}
 	
