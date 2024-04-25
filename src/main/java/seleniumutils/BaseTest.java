@@ -13,7 +13,7 @@ public class BaseTest {
 		
 		driver = new EdgeDriver();
 		driver.manage().window().maximize();
-		driver.get("https://keybooks.ro/");
+		driver.get("https://keybooks.ro/contact");
 		
 	}
 	
